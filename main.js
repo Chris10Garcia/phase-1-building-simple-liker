@@ -16,9 +16,10 @@ function fillHeartServer(e){
     .catch((err) => errorDispay(err))
 }
 
-function errorDispay(){
+function errorDispay(err){
   const errorNode = document.getElementById('modal')
   errorNode.className = ''
+  errorNode.querySelector('p').innerText = err
   setTimeout(() => errorNode.className = 'hidden', 3000)
 }
 
