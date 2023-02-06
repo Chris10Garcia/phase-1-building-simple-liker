@@ -6,6 +6,39 @@ const FULL_HEART = '♥'
 
 
 
+let heartNodes = document.querySelectorAll('span.like-glyph')
+heartNodes.forEach((eachNode) => {eachNode.addEventListener('click', bttClicked)})
+
+
+function fillHeartServer(e){
+  mimicServerCall()
+    .then(()=> fillHeartHTML(e))
+    .catch((err) => errorDispay(err))
+}
+
+function errorDispay(){
+  const errorNode = document.getElementById('modal')
+  errorNode.className = ''
+  setTimeout(() => errorNode.className = 'hidden', 3000)
+}
+
+function fillHeartHTML(e){
+  e.target.innerText = FULL_HEART
+  e.target.className = `${e.target.className} activated-heart` 
+}
+
+function removeHeartHTML(e){
+  e.target.innerText = EMPTY_HEART
+  e.target.className = 'like-glyph'
+}
+
+function bttClicked(e){
+  if (e.target.innerText === EMPTY_HEART){
+    fillHeartServer(e)
+  } else {
+    removeHeartHTML(e)
+  }
+}
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
